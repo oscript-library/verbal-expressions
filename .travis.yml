@@ -1,0 +1,8 @@
+language: csharp
+install:
+    - wget https://dist.nuget.org/win-x86-commandline/latest/nuget.exe
+    - mono nuget.exe restore
+    - mono nuget.exe install NUnit.ConsoleRunner -Version 3.6.1 -OutputDirectory testrunner
+script:
+    - xbuild /p:Configuration=Release
+    - mono ./testrunner/NUnit.ConsoleRunner.3.6.1/tools/nunit3-console.exe ./NUnitTests/bin/Release/NUnitTests.dll

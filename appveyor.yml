@@ -1,0 +1,53 @@
+version: 1.0.{build}
+environment:
+  main_project: oscript-component
+before_build:
+- ps: nuget restore
+init:
+- ps: Set-WinSystemLocale ru-RU
+- ps: Start-Sleep -s 5
+- ps: Restart-Computer
+install:
+- cmd: >-
+    mkdir engine
+
+    cd engine
+
+    appveyor DownloadFile http://oscript.io/downloads/latest/exe -FileName os.exe
+
+    os.exe /silent
+
+    set PATH=%ProgramFiles(x86)%\OneScript\bin;%PATH%
+
+    cd ..
+    
+    appveyor DownloadFile https://github.com/dmpas/OneScriptDocumenter/releases/download/1.0.13/documenter.zip -FileName OneScriptDocumenter.zip
+    
+    7z x OneScriptDocumenter.zip > NUL
+
+    oscript -version
+
+    opm install opm
+
+build:
+  verbosity: minimal
+configuration: Release
+test_script:
+- cmd: nunit3-console --x86 NUnitTests\bin\%CONFIGURATION%\NUnitTests.dll
+
+after_build:
+- cmd: >-
+
+    del %main_project%\bin\%CONFIGURATION%\*.pdb
+
+    mkdir bin
+
+    xcopy %main_project%\bin\%CONFIGURATION%\%main_project%.* bin\
+
+    OneScriptDocumenter.exe json bin\syntaxHelp.json %main_project%\bin\%CONFIGURATION%\%main_project%.dll
+
+    opm build .
+
+artifacts:
+- path: .\*.ospx
+  name: component
