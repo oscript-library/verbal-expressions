@@ -8,7 +8,7 @@ using ScriptEngine.Machine;
 namespace OnescriptVerbalExpressions
 {
 	/// <summary>
-	/// Некоторый класс
+	/// Класс предоставляет объектную модель для построения регулярных выражений.
 	/// </summary>
 	[ContextClass("ВербальноеВыражение", "VerbalExpression")]
 	public class VerbalExpression : AutoContext<VerbalExpression>
@@ -18,6 +18,11 @@ namespace OnescriptVerbalExpressions
 		
 		#region Terminals
 
+		/// <summary>
+		/// Преобразует объект в РегулярноеВыражение.
+		/// </summary>
+		/// <returns>РегулярноеВыражение</returns>
+		/// <exception cref="TypeLoadException"></exception>
 		[ContextMethod("ВРегулярноеВыражение")]
 		public IRuntimeContextInstance ToRegex()
 		{
@@ -47,6 +52,10 @@ namespace OnescriptVerbalExpressions
 
 		}
 		
+		/// <summary>
+		/// Преобразует объект в строку.
+		/// </summary>
+		/// <returns>Строка</returns>
 		[ContextMethod("ВСтроку", "ToString")]
 		public string ToStringImpl()
 		{
@@ -57,12 +66,24 @@ namespace OnescriptVerbalExpressions
 
 		#region Modifiers
 
+		/// <summary>
+		/// Ищет в строке определенное значение. То же самое, что и `Затем()`.
+		/// </summary>
+		/// <param name="value">Искомое значение</param>
+		/// <param name="sanitize">Экранировать переданное значение</param>
+		/// <returns>ВербальноеВыражение</returns>
 		[ContextMethod("Найти")]
 		public VerbalExpression Find(string value, bool sanitize = true)
 		{
 			return Then(value, sanitize);
 		}
 		
+		/// <summary>
+		/// Ищет в строке определенное значение. То же самое, что и `Найти()`.
+		/// </summary>
+		/// <param name="value">Искомое значение</param>
+		/// <param name="sanitize">Экранировать переданное значение</param>
+		/// <returns>ВербальноеВыражение</returns>
 		[ContextMethod("Затем")]
 		public VerbalExpression Then(string value, bool sanitize = true)
 		{
