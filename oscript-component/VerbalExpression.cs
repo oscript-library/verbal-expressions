@@ -202,6 +202,19 @@ namespace OnescriptVerbalExpressions
 			return this;
 		}
 		
+		[ContextMethod("ПовторитьПредыдущее")]
+		public IRuntimeContextInstance RepeatPrevious(int n)
+		{
+			_verbalExpression.RepeatPrevious(n);
+			return this;
+		}
+		
+		[ContextMethod("ПовторитьПредыдущееОтИДо")]
+		public IRuntimeContextInstance RepeatPreviousFromAndTo(int n, int m)
+		{
+			_verbalExpression.RepeatPrevious(n, m);
+			return this;
+		}
 
 		#endregion
 
