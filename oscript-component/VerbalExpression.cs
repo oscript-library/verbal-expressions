@@ -48,34 +48,34 @@ namespace OnescriptVerbalExpressions
 		#region Modifiers
 
 		[ContextMethod("Найти")]
-		public IRuntimeContextInstance Find(string value, bool sanitize = true)
+		public VerbalExpression Find(string value, bool sanitize = true)
 		{
 			return Then(value, sanitize);
 		}
 		
 		[ContextMethod("Затем")]
-		public IRuntimeContextInstance Then(string value, bool sanitize = true)
+		public VerbalExpression Then(string value, bool sanitize = true)
 		{
 			_verbalExpression.Then(value, sanitize);
 			return this;
 		}
 		
 		[ContextMethod("Либо")]
-		public IRuntimeContextInstance Or(string value)
+		public VerbalExpression Or(string value)
 		{
 			_verbalExpression.Or(value);
 			return this;
 		}
 		
 		[ContextMethod("ЧтоУгодно")]
-		public IRuntimeContextInstance Anything()
+		public VerbalExpression Anything()
 		{
 			_verbalExpression.Anything();
 			return this;
 		}
 		
 		[ContextMethod("ЧтоУгодноНоНе")]
-		public IRuntimeContextInstance AnythingBut(string value)
+		public VerbalExpression AnythingBut(string value)
 		{
 			// TODO: sanitaze?
 			_verbalExpression.AnythingBut(value);
@@ -83,14 +83,14 @@ namespace OnescriptVerbalExpressions
 		}
 		
 		[ContextMethod("ЧтоНибудь")]
-		public IRuntimeContextInstance Something()
+		public VerbalExpression Something()
 		{
 			_verbalExpression.Something();
 			return this;
 		}
 		
 		[ContextMethod("ЧтоНибудьНоНе")]
-		public IRuntimeContextInstance SomethingBut(string value)
+		public VerbalExpression SomethingBut(string value)
 		{
 			// TODO: sanitaze?
 			_verbalExpression.SomethingBut(value);
@@ -98,7 +98,7 @@ namespace OnescriptVerbalExpressions
 		}
 		
 		[ContextMethod("МожетБыть")]
-		public IRuntimeContextInstance Maybe(string value)
+		public VerbalExpression Maybe(string value)
 		{
 			// TODO: sanitaze?
 			_verbalExpression.Maybe(value);
@@ -106,7 +106,7 @@ namespace OnescriptVerbalExpressions
 		}
 				
 		[ContextMethod("НачалоСтроки")]
-		public IRuntimeContextInstance StartOfLine()
+		public VerbalExpression StartOfLine()
 		{
 			// TODO: enable?
 			_verbalExpression.StartOfLine();
@@ -114,7 +114,7 @@ namespace OnescriptVerbalExpressions
 		}
 		
 		[ContextMethod("КонецСтроки")]
-		public IRuntimeContextInstance EndOfLine()
+		public VerbalExpression EndOfLine()
 		{
 			// TODO: enable?
 			_verbalExpression.EndOfLine();
@@ -126,56 +126,56 @@ namespace OnescriptVerbalExpressions
 		#region Special characters and groups
 
 		[ContextMethod("ПереводСтроки")]
-		public IRuntimeContextInstance LineBreak()
+		public VerbalExpression LineBreak()
 		{
 			_verbalExpression.LineBreak();
 			return this;
 		}
 		
 		[ContextMethod("ПС")]
-		public IRuntimeContextInstance LF()
+		public VerbalExpression LF()
 		{
 			_verbalExpression.Br();
 			return this;
 		}
 		
 		[ContextMethod("Отступ")]
-		public IRuntimeContextInstance Tab()
+		public VerbalExpression Tab()
 		{
 			_verbalExpression.Tab();
 			return this;
 		}
 		
 		[ContextMethod("Слово")]
-		public IRuntimeContextInstance Word()
+		public VerbalExpression Word()
 		{
 			_verbalExpression.Word();
 			return this;
 		}
 		
 		[ContextMethod("Диапазон")]
-		public IRuntimeContextInstance Range(string from, string to)
+		public VerbalExpression Range(string from, string to)
 		{
 			_verbalExpression.Range(from, to);
 			return this;
 		}
 			
 		[ContextMethod("Любой")]
-		public IRuntimeContextInstance Any(string value)
+		public VerbalExpression Any(string value)
 		{
 			_verbalExpression.Any(value);
 			return this;
 		}
 		
 		[ContextMethod("ЛюбойИз")]
-		public IRuntimeContextInstance AnyOf(string value)
+		public VerbalExpression AnyOf(string value)
 		{
 			_verbalExpression.AnyOf(value);
 			return this;
 		}
 		
 		[ContextMethod("ОдинИлиБольше")]
-		public IRuntimeContextInstance OneOrMore(string value = "")
+		public VerbalExpression OneOrMore(string value = "")
 		{
 			if (value == null)
 			{
@@ -189,7 +189,7 @@ namespace OnescriptVerbalExpressions
 		}
 		
 		[ContextMethod("НачатьЗахват")]
-		public IRuntimeContextInstance BeginCapture(string groupName = "")
+		public VerbalExpression BeginCapture(string groupName = "")
 		{
 			if (groupName == null)
 			{
@@ -203,21 +203,21 @@ namespace OnescriptVerbalExpressions
 		}
 		
 		[ContextMethod("ЗакончитьЗахват")]
-		public IRuntimeContextInstance EndCapture()
+		public VerbalExpression EndCapture()
 		{
 			_verbalExpression.EndCapture();
 			return this;
 		}
 		
 		[ContextMethod("ПовторитьПредыдущее")]
-		public IRuntimeContextInstance RepeatPrevious(int n)
+		public VerbalExpression RepeatPrevious(int n)
 		{
 			_verbalExpression.RepeatPrevious(n);
 			return this;
 		}
 		
 		[ContextMethod("ПовторитьПредыдущееОтИДо")]
-		public IRuntimeContextInstance RepeatPreviousFromAndTo(int n, int m)
+		public VerbalExpression RepeatPreviousFromAndTo(int n, int m)
 		{
 			_verbalExpression.RepeatPrevious(n, m);
 			return this;
@@ -228,7 +228,7 @@ namespace OnescriptVerbalExpressions
 		#region Other
 
 		[ContextMethod("Добавить")]
-		public IRuntimeContextInstance Add(string value)
+		public VerbalExpression Add(string value)
 		{
 			_verbalExpression.Add(value);
 			return this;
@@ -237,7 +237,7 @@ namespace OnescriptVerbalExpressions
 		#endregion
 		
 		[ScriptConstructor]
-		public static IRuntimeContextInstance Constructor()
+		public static VerbalExpression Constructor()
 		{
 			return new VerbalExpression();
 		}
