@@ -322,6 +322,12 @@ namespace OnescriptVerbalExpressions
 			_verbalExpression.Add(value);
 			return this;
 		}
+		
+		[ContextMethod("Экранировать")]
+		public string Sanitize(string value)
+		{
+			return _verbalExpression.Sanitize(value);
+		}
 
 		#endregion
 		
