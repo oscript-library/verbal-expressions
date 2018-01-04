@@ -1,5 +1,6 @@
 ﻿using System;
 using System.IO;
+using System.Reflection;
 using NUnit.Framework;
 using ScriptEngine.Machine.Contexts;
 using ScriptEngine.HostedScript.Library;
@@ -45,7 +46,13 @@ namespace NUnitTests
 
 			var testrunnerSource = LoadFromAssemblyResource("NUnitTests.Tests.testrunner.os");
 			var testrunnerModule = engine.GetCompilerService().CreateModule(testrunnerSource);
-
+			
+			{
+				var mi = engine.GetType().GetMethod("SetGlobalEnvironment",
+					BindingFlags.NonPublic | BindingFlags.InvokeMethod | BindingFlags.Instance);
+				mi.Invoke(engine, new object[] {this, testrunnerSource});
+			}
+			
 			engine.LoadUserScript(new ScriptEngine.UserAddedScript()
 			{
 				Type = ScriptEngine.UserAddedScriptType.Class,
@@ -115,6 +122,7 @@ namespace NUnitTests
 
 		public void Echo(string str, MessageStatusEnum status = MessageStatusEnum.Ordinary)
 		{
+			Console.WriteLine(str);
 		}
 
 		public string[] GetCommandLineArguments()
