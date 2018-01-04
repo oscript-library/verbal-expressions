@@ -43,6 +43,7 @@ after_build:
     mkdir bin
 
     xcopy %main_project%\bin\%CONFIGURATION%\%main_project%.* bin\
+    xcopy %main_project%\bin\%CONFIGURATION%\VerbalExpressions.dll bin\
 
     OneScriptDocumenter.exe json bin\syntaxHelp.json %main_project%\bin\%CONFIGURATION%\%main_project%.dll
 
