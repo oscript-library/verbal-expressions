@@ -173,6 +173,13 @@ namespace OnescriptVerbalExpressions
 			_verbalExpression.AnyOf(value);
 			return this;
 		}
+		
+		[ContextMethod("ОдинИлиБольше")]
+		public IRuntimeContextInstance OneOrMore(string value)
+		{
+			_verbalExpression.Multiple(value);
+			return this;
+		}
 
 		#endregion
 
