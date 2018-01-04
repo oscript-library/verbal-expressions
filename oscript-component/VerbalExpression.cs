@@ -78,6 +78,27 @@ namespace OnescriptVerbalExpressions
 			return this;
 		}
 		
+		[ContextMethod("ПереводСтроки")]
+		public IRuntimeContextInstance LineBreak()
+		{
+			_verbalExpression.LineBreak();
+			return this;
+		}
+		
+		[ContextMethod("ПС")]
+		public IRuntimeContextInstance LF()
+		{
+			_verbalExpression.LineBreak();
+			return this;
+		}
+		
+		[ContextMethod("Отступ")]
+		public IRuntimeContextInstance Tab()
+		{
+			_verbalExpression.Tab();
+			return this;
+		}
+		
 		[ContextMethod("НачалоСтроки")]
 		public IRuntimeContextInstance StartOfLine()
 		{
