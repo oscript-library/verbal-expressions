@@ -180,6 +180,28 @@ namespace OnescriptVerbalExpressions
 			_verbalExpression.Multiple(value);
 			return this;
 		}
+		
+		[ContextMethod("НачатьЗахват")]
+		public IRuntimeContextInstance BeginCapture(string groupName = "")
+		{
+			if (groupName == "")
+			{
+				_verbalExpression.BeginCapture();
+			}
+			else
+			{
+				_verbalExpression.BeginCapture(groupName);
+			}
+			return this;
+		}
+		
+		[ContextMethod("ЗакончитьЗахват")]
+		public IRuntimeContextInstance EndCapture()
+		{
+			_verbalExpression.EndCapture();
+			return this;
+		}
+		
 
 		#endregion
 
