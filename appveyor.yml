@@ -42,11 +42,11 @@ after_build:
 
     mkdir bin
 
+    OneScriptDocumenter.exe json bin\syntaxHelp.json %main_project%\bin\%CONFIGURATION%\%main_project%.dll
+    
     del %main_project%\bin\%CONFIGURATION%\ScriptEngine*.* %main_project%\bin\%CONFIGURATION%\NewtonSoft*.* %main_project%\bin\%CONFIGURATION%\DotNetZip*.*
     
     xcopy %main_project%\bin\%CONFIGURATION%\* bin\
-
-    OneScriptDocumenter.exe json bin\syntaxHelp.json %main_project%\bin\%CONFIGURATION%\%main_project%.dll
 
     opm build .
 
