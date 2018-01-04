@@ -159,6 +159,20 @@ namespace OnescriptVerbalExpressions
 			_verbalExpression.Range(from, to);
 			return this;
 		}
+			
+		[ContextMethod("Любой")]
+		public IRuntimeContextInstance Any(string value)
+		{
+			_verbalExpression.Any(value);
+			return this;
+		}
+		
+		[ContextMethod("ЛюбойИз")]
+		public IRuntimeContextInstance AnyOf(string value)
+		{
+			_verbalExpression.AnyOf(value);
+			return this;
+		}
 
 		#endregion
 
