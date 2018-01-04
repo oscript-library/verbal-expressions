@@ -163,6 +163,20 @@ namespace OnescriptVerbalExpressions
 			return this;
 		}
 		
+		[ContextMethod("Число")]
+		public VerbalExpression Digit()
+		{
+			_verbalExpression.Add("\\d", false);
+			return this;
+		}
+		
+		[ContextMethod("ПробельныйСимвол")]
+		public VerbalExpression Whitespace()
+		{
+			_verbalExpression.Add("\\s", false);
+			return this;
+		}
+		
 		[ContextMethod("Диапазон")]
 		public VerbalExpression Range(string from, string to)
 		{
