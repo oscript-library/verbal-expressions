@@ -156,12 +156,12 @@ namespace OnescriptVerbalExpressions
 		/// Поиск необязательного значения. 
 		/// </summary>
 		/// <param name="value">Искомое значение</param>
+		/// <param name="sanitize">Экранировать переданное значение</param>
 		/// <returns>ВербальноеВыражение</returns>
 		[ContextMethod("МожетБыть")]
-		public VerbalExpression Maybe(string value)
+		public VerbalExpression Maybe(string value, bool sanitize = true)
 		{
-			// TODO: sanitaze?
-			_verbalExpression.Maybe(value);
+			_verbalExpression.Maybe(value, sanitize);
 			return this;
 		}
 				
@@ -305,7 +305,7 @@ namespace OnescriptVerbalExpressions
 		[ContextMethod("ОдинИлиБольше")]
 		public VerbalExpression OneOrMore(string value = "", bool sanitize = true)
 		{
-			if (value == null)
+			if (string.IsNullOrEmpty(value))
 			{
 				_verbalExpression.Add("+", false);
 			}
@@ -324,7 +324,7 @@ namespace OnescriptVerbalExpressions
 		[ContextMethod("НачатьЗахват")]
 		public VerbalExpression BeginCapture(string groupName = "")
 		{
-			if (groupName == null)
+			if (string.IsNullOrEmpty(groupName))
 			{
 				_verbalExpression.BeginCapture();
 			}
