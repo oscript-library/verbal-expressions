@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Reflection;
+using System.Text.RegularExpressions;
 using CSharpVerbalExpressions;
 using ScriptEngine.Machine.Contexts;
 using ScriptEngine.Machine;
@@ -13,6 +14,7 @@ namespace OnescriptVerbalExpressions
 	public class VerbalExpression : AutoContext<VerbalExpression>
 	{
 		private readonly VerbalExpressions _verbalExpression = new VerbalExpressions();
+		private RegexOptions _modifiers = RegexOptions.IgnoreCase | RegexOptions.Multiline;
 		
 		#region Terminals
 
@@ -33,6 +35,14 @@ namespace OnescriptVerbalExpressions
 				new object[] {ValueFactory.Create(regexString)}
 			);
 
+			var propertyMultiline = oscriptRegExpImpl.FindProperty("Multiline");
+			var valueMultiline = _modifiers.HasFlag(RegexOptions.Multiline);
+			oscriptRegExpImpl.SetPropValue(propertyMultiline, ValueFactory.Create(valueMultiline));
+			
+			var propertyIgnoreCase = oscriptRegExpImpl.FindProperty("IgnoreCase");
+			var valueIgnoreCase = _modifiers.HasFlag(RegexOptions.IgnoreCase);
+			oscriptRegExpImpl.SetPropValue(propertyIgnoreCase, ValueFactory.Create(valueIgnoreCase));
+			
 			return oscriptRegExpImpl;
 
 		}
@@ -225,6 +235,85 @@ namespace OnescriptVerbalExpressions
 
 		#endregion
 
+		#region RegExp options
+
+		[ContextMethod("СЛюбымРегистром")]
+		public VerbalExpression WithAnyCase(bool enable)
+		{
+			if (enable)
+			{
+				AddModifier("i");
+			}
+			else
+			{
+				RemoveModifier("i");
+			}
+			_verbalExpression.WithAnyCase(enable);
+			return this;
+		}
+		
+		[ContextMethod("ОднострочныйПоиск")]
+		public VerbalExpression SearchOneLine(bool enable)
+		{
+			if (enable)
+			{
+				RemoveModifier("m");
+			}
+			else
+			{
+				AddModifier("m");
+			}
+			_verbalExpression.UseOneLineSearchOption(enable);
+			return this;
+		}
+		
+		[ContextMethod("ДобавитьМодификатор")]
+		public VerbalExpression AddModifier(string modifier)
+		{
+			switch (modifier)
+			{
+				case "i":
+					_modifiers |= RegexOptions.IgnoreCase;
+					break;
+				case "m":
+					_modifiers |= RegexOptions.Multiline;
+					break;
+				case "s":
+					_modifiers |= RegexOptions.Singleline;
+					break;
+				case "x":
+					_modifiers |= RegexOptions.IgnorePatternWhitespace;
+					break;
+			}
+
+			_verbalExpression.AddModifier(modifier.ToCharArray(0, 1)[0]);
+			return this;
+		}
+
+		[ContextMethod("УдалитьМодификатор")]
+		public VerbalExpression RemoveModifier(string modifier)
+		{
+			switch (modifier)
+			{
+				case "i":
+					_modifiers &= ~RegexOptions.IgnoreCase;
+					break;
+				case "m":
+					_modifiers &= ~RegexOptions.Multiline;
+					break;
+				case "s":
+					_modifiers &= ~RegexOptions.Singleline;
+					break;
+				case "x":
+					_modifiers &= ~RegexOptions.IgnorePatternWhitespace;
+					break;
+			}
+
+			_verbalExpression.RemoveModifier(modifier.ToCharArray(0, 1)[0]);
+			return this;
+		}
+		#endregion
+		
 		#region Other
 
 		[ContextMethod("Добавить")]

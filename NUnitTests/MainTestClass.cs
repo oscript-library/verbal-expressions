@@ -23,7 +23,7 @@ namespace NUnitTests
 		{
 			var verbalExpression = new VerbalExpression();
 
-			verbalExpression.Word();
+			verbalExpression.Word().WithAnyCase(false);
 
 			Assert.AreEqual(verbalExpression.ToStringImpl(), "\\w+");
 
