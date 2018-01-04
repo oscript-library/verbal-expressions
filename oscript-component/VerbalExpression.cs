@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Reflection;
-using System.Text.RegularExpressions;
 using CSharpVerbalExpressions;
 using ScriptEngine.Machine.Contexts;
 using ScriptEngine.Machine;
@@ -48,6 +47,20 @@ namespace OnescriptVerbalExpressions
 
 		#region Modifiers
 
+		[ContextMethod("Найти")]
+		public IRuntimeContextInstance Find(string value)
+		{
+			_verbalExpression.Find(value);
+			return this;
+		}
+		
+		[ContextMethod("Затем")]
+		public IRuntimeContextInstance Then(string value)
+		{
+			_verbalExpression.Then(value);
+			return this;
+		}
+		
 		[ContextMethod("ЧтоУгодно")]
 		public IRuntimeContextInstance Anything()
 		{
