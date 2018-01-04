@@ -21,7 +21,7 @@ namespace OnescriptVerbalExpressions
 		/// <summary>
 		/// Преобразует объект в РегулярноеВыражение.
 		/// </summary>
-		/// <returns>РегулярноеВыражение</returns>
+		/// <returns>Объект РегулярноеВыражение с заполненным шаблоном поиска и флагами</returns>
 		/// <exception cref="TypeLoadException"></exception>
 		[ContextMethod("ВРегулярноеВыражение")]
 		public IRuntimeContextInstance ToRegex()
@@ -55,7 +55,7 @@ namespace OnescriptVerbalExpressions
 		/// <summary>
 		/// Преобразует объект в строку.
 		/// </summary>
-		/// <returns>Строка</returns>
+		/// <returns>Текст регулярного выражения в виде строки</returns>
 		[ContextMethod("ВСтроку", "ToString")]
 		public string ToStringImpl()
 		{
@@ -91,13 +91,23 @@ namespace OnescriptVerbalExpressions
 			return this;
 		}
 		
+		/// <summary>
+		/// Добавление условия ИЛИ в выражение.
+		/// </summary>
+		/// <param name="value">Искомое значение</param>
+		/// <param name="sanitize">Экранировать переданное значение</param>
+		/// <returns>ВербальноеВыражение</returns>
 		[ContextMethod("Либо")]
-		public VerbalExpression Or(string value)
+		public VerbalExpression Or(string value, bool sanitize = true)
 		{
-			_verbalExpression.Or(value);
+			_verbalExpression.Or(value, sanitize);
 			return this;
 		}
 		
+		/// <summary>
+		/// Поиск "чего угодно", в том числе отсутствия символов.
+		/// </summary>
+		/// <returns>ВербальноеВыражение</returns>
 		[ContextMethod("ЧтоУгодно")]
 		public VerbalExpression Anything()
 		{
@@ -105,14 +115,23 @@ namespace OnescriptVerbalExpressions
 			return this;
 		}
 		
+		/// <summary>
+		/// Поиск "чего угодно, кроме" указанных символов, в том числе их отсутствие.
+		/// </summary>
+		/// <param name="value">Искомое значение</param>
+		/// <param name="sanitize">Экранировать переданное значение</param>
+		/// <returns>ВербальноеВыражение</returns>
 		[ContextMethod("ЧтоУгодноНоНе")]
-		public VerbalExpression AnythingBut(string value)
+		public VerbalExpression AnythingBut(string value, bool sanitize = true)
 		{
-			// TODO: sanitaze?
-			_verbalExpression.AnythingBut(value);
+			_verbalExpression.AnythingBut(value, sanitize);
 			return this;
 		}
 		
+		/// <summary>
+		/// Поиск "чего-нибудь" - любого символа хотя бы один раз.
+		/// </summary>
+		/// <returns>ВербальноеВыражение</returns>
 		[ContextMethod("ЧтоНибудь")]
 		public VerbalExpression Something()
 		{
@@ -120,14 +139,24 @@ namespace OnescriptVerbalExpressions
 			return this;
 		}
 		
+		/// <summary>
+		/// Поиск "чего-нибудь, кроме" указанных символов хотя бы один раз.
+		/// </summary>
+		/// <param name="value">Искомое значение</param>
+		/// <param name="sanitize">Экранировать переданное значение</param>
+		/// <returns>ВербальноеВыражение</returns>
 		[ContextMethod("ЧтоНибудьНоНе")]
-		public VerbalExpression SomethingBut(string value)
+		public VerbalExpression SomethingBut(string value, bool sanitize = true)
 		{
-			// TODO: sanitaze?
-			_verbalExpression.SomethingBut(value);
+			_verbalExpression.SomethingBut(value, sanitize);
 			return this;
 		}
 		
+		/// <summary>
+		/// Поиск необязательного значения. 
+		/// </summary>
+		/// <param name="value">Искомое значение</param>
+		/// <returns>ВербальноеВыражение</returns>
 		[ContextMethod("МожетБыть")]
 		public VerbalExpression Maybe(string value)
 		{
@@ -136,18 +165,24 @@ namespace OnescriptVerbalExpressions
 			return this;
 		}
 				
+		/// <summary>
+		/// Добавляет в поиск префикс "начала строки".
+		/// </summary>
+		/// <returns>ВербальноеВыражение</returns>
 		[ContextMethod("НачалоСтроки")]
 		public VerbalExpression StartOfLine()
 		{
-			// TODO: enable?
 			_verbalExpression.StartOfLine();
 			return this;
 		}
 		
+		/// <summary>
+		/// Добавляет в поиск суффикс "конца строки".
+		/// </summary>
+		/// <returns>ВербальноеВыражение</returns>
 		[ContextMethod("КонецСтроки")]
 		public VerbalExpression EndOfLine()
 		{
-			// TODO: enable?
 			_verbalExpression.EndOfLine();
 			return this;
 		}
@@ -156,6 +191,10 @@ namespace OnescriptVerbalExpressions
 
 		#region Special characters and groups
 
+		/// <summary>
+		/// Перевод строки.
+		/// </summary>
+		/// <returns>ВербальноеВыражение</returns>
 		[ContextMethod("ПереводСтроки")]
 		public VerbalExpression LineBreak()
 		{
@@ -163,6 +202,10 @@ namespace OnescriptVerbalExpressions
 			return this;
 		}
 		
+		/// <summary>
+		/// Перевод строки.
+		/// </summary>
+		/// <returns>ВербальноеВыражение</returns>
 		[ContextMethod("ПС")]
 		public VerbalExpression LF()
 		{
@@ -170,6 +213,10 @@ namespace OnescriptVerbalExpressions
 			return this;
 		}
 		
+		/// <summary>
+		/// Символ табуляции.
+		/// </summary>
+		/// <returns>ВербальноеВыражение</returns>
 		[ContextMethod("Отступ")]
 		public VerbalExpression Tab()
 		{
@@ -177,6 +224,10 @@ namespace OnescriptVerbalExpressions
 			return this;
 		}
 		
+		/// <summary>
+		/// Буквенно-цифровая последовательность символов.
+		/// </summary>
+		/// <returns>ВербальноеВыражение</returns>
 		[ContextMethod("Слово")]
 		public VerbalExpression Word()
 		{
@@ -184,6 +235,10 @@ namespace OnescriptVerbalExpressions
 			return this;
 		}
 		
+		/// <summary>
+		/// Любое число.
+		/// </summary>
+		/// <returns>ВербальноеВыражение</returns>
 		[ContextMethod("Число")]
 		public VerbalExpression Digit()
 		{
@@ -191,6 +246,10 @@ namespace OnescriptVerbalExpressions
 			return this;
 		}
 		
+		/// <summary>
+		/// Любой пробельный символ.
+		/// </summary>
+		/// <returns>ВербальноеВыражение</returns>
 		[ContextMethod("ПробельныйСимвол")]
 		public VerbalExpression Whitespace()
 		{
@@ -198,6 +257,12 @@ namespace OnescriptVerbalExpressions
 			return this;
 		}
 		
+		/// <summary>
+		/// Диапазон символов.
+		/// </summary>
+		/// <param name="from">Нижняя граница диапазона</param>
+		/// <param name="to">Верхняя граница диапазона</param>
+		/// <returns>ВербальноеВыражение</returns>
 		[ContextMethod("Диапазон")]
 		public VerbalExpression Range(string from, string to)
 		{
@@ -205,6 +270,11 @@ namespace OnescriptVerbalExpressions
 			return this;
 		}
 			
+		/// <summary>
+		/// Любой из указанных символов. То же самое, что и `ЛюбойИз()`
+		/// </summary>
+		/// <param name="value">Искомое значение</param>
+		/// <returns>ВербальноеВыражение</returns>
 		[ContextMethod("Любой")]
 		public VerbalExpression Any(string value)
 		{
@@ -212,6 +282,11 @@ namespace OnescriptVerbalExpressions
 			return this;
 		}
 		
+		/// <summary>
+		/// Любой из указанных символов. То же самое, что и `Любой()`
+		/// </summary>
+		/// <param name="value">Искомое значение</param>
+		/// <returns>ВербальноеВыражение</returns>
 		[ContextMethod("ЛюбойИз")]
 		public VerbalExpression AnyOf(string value)
 		{
@@ -219,8 +294,16 @@ namespace OnescriptVerbalExpressions
 			return this;
 		}
 		
+		/// <summary>
+		/// Поиск "одного или более".
+		/// Если передан параметр `value`, то мультипликатор применяется к нему.
+		/// Если параметр `value` не передан, то мультипликатор применяется к предыдущей группе регулярного выражения.
+		/// </summary>
+		/// <param name="value">Искомое значение</param>
+		/// <param name="sanitize">Экранировать переданное значение</param>
+		/// <returns>ВербальноеВыражение</returns>
 		[ContextMethod("ОдинИлиБольше")]
-		public VerbalExpression OneOrMore(string value = "")
+		public VerbalExpression OneOrMore(string value = "", bool sanitize = true)
 		{
 			if (value == null)
 			{
@@ -228,11 +311,16 @@ namespace OnescriptVerbalExpressions
 			}
 			else
 			{
-				_verbalExpression.Multiple(value);
+				_verbalExpression.Multiple(value, sanitize);
 			}
 			return this;
 		}
 		
+		/// <summary>
+		/// Начать захват группы.
+		/// </summary>
+		/// <param name="groupName">Имя группы</param>
+		/// <returns>ВербальноеВыражение</returns>
 		[ContextMethod("НачатьЗахват")]
 		public VerbalExpression BeginCapture(string groupName = "")
 		{
@@ -247,6 +335,10 @@ namespace OnescriptVerbalExpressions
 			return this;
 		}
 		
+		/// <summary>
+		/// Закончить захват группы.
+		/// </summary>
+		/// <returns>ВербальноеВыражение</returns>
 		[ContextMethod("ЗакончитьЗахват")]
 		public VerbalExpression EndCapture()
 		{
@@ -254,6 +346,11 @@ namespace OnescriptVerbalExpressions
 			return this;
 		}
 		
+		/// <summary>
+		/// Повторить предыдущую группу поиска n раз.
+		/// </summary>
+		/// <param name="n">Число повторений</param>
+		/// <returns>ВербальноеВыражение</returns>
 		[ContextMethod("ПовторитьПредыдущее")]
 		public VerbalExpression RepeatPrevious(int n)
 		{
@@ -261,6 +358,12 @@ namespace OnescriptVerbalExpressions
 			return this;
 		}
 		
+		/// <summary>
+		/// Повторить предыдущую группу поиска от n до m раз.
+		/// </summary>
+		/// <param name="n">Нижняя гранница</param>
+		/// <param name="m">Верхняя граница</param>
+		/// <returns>ВербальноеВыражение</returns>
 		[ContextMethod("ПовторитьПредыдущееОтИДо")]
 		public VerbalExpression RepeatPreviousFromAndTo(int n, int m)
 		{
@@ -272,6 +375,11 @@ namespace OnescriptVerbalExpressions
 
 		#region RegExp options
 
+		/// <summary>
+		/// Включить поиск без учета регистра символов.
+		/// </summary>
+		/// <param name="enable">Флаг включения/выключения поиска</param>
+		/// <returns>ВербальноеВыражение</returns>
 		[ContextMethod("СЛюбымРегистром")]
 		public VerbalExpression WithAnyCase(bool enable)
 		{
@@ -287,6 +395,11 @@ namespace OnescriptVerbalExpressions
 			return this;
 		}
 		
+		/// <summary>
+		/// Включить поиск только по одной строке. 
+		/// </summary>
+		/// <param name="enable">Флаг включения/выключения поиска</param>
+		/// <returns>ВербальноеВыражение</returns>
 		[ContextMethod("ОднострочныйПоиск")]
 		public VerbalExpression SearchOneLine(bool enable)
 		{
@@ -302,6 +415,12 @@ namespace OnescriptVerbalExpressions
 			return this;
 		}
 		
+		/// <summary>
+		/// Добавление модификатора регулярного выражения.
+		/// Допустимые значения: i, m.
+		/// </summary>
+		/// <param name="modifier">Устанавливаемый модификатор</param>
+		/// <returns>ВербальноеВыражение</returns>
 		[ContextMethod("ДобавитьМодификатор")]
 		public VerbalExpression AddModifier(string modifier)
 		{
@@ -325,6 +444,12 @@ namespace OnescriptVerbalExpressions
 			return this;
 		}
 
+		/// <summary>
+		/// Удаление модификатора регулярного выражения.
+		/// Допустимые значения: i, m.
+		/// </summary>
+		/// <param name="modifier">Удаляемый модификатор</param>
+		/// <returns>ВербальноеВыражение</returns>
 		[ContextMethod("УдалитьМодификатор")]
 		public VerbalExpression RemoveModifier(string modifier)
 		{
@@ -351,13 +476,24 @@ namespace OnescriptVerbalExpressions
 		
 		#region Other
 
+		/// <summary>
+		/// Добавление произвольного текста в регулярное выражение.
+		/// </summary>
+		/// <param name="value">Добавляемый текст</param>
+		/// <param name="sanitize">Экранировать переданное значение</param>
+		/// <returns>ВербальноеВыражение</returns>
 		[ContextMethod("Добавить")]
-		public VerbalExpression Add(string value)
+		public VerbalExpression Add(string value, bool sanitize = true)
 		{
-			_verbalExpression.Add(value);
+			_verbalExpression.Add(value, sanitize);
 			return this;
 		}
 		
+		/// <summary>
+		/// Экранирование управляющих символов регулярного выражения в переданной строке.
+		/// </summary>
+		/// <param name="value">Экранируемая строка</param>
+		/// <returns>Экранированная строка</returns>
 		[ContextMethod("Экранировать")]
 		public string Sanitize(string value)
 		{
@@ -366,6 +502,10 @@ namespace OnescriptVerbalExpressions
 
 		#endregion
 		
+		/// <summary>
+		/// Конструктор Вербального выражения.
+		/// </summary>
+		/// <returns>ВербальноеВыражение</returns>
 		[ScriptConstructor]
 		public static VerbalExpression Constructor()
 		{
