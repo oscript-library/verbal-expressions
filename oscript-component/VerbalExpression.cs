@@ -152,6 +152,13 @@ namespace OnescriptVerbalExpressions
 			_verbalExpression.Word();
 			return this;
 		}
+		
+		[ContextMethod("Диапазон")]
+		public IRuntimeContextInstance Range(string from, string to)
+		{
+			_verbalExpression.Range(from, to);
+			return this;
+		}
 
 		#endregion
 
