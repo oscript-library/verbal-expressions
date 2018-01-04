@@ -5,7 +5,7 @@ using System.Runtime.CompilerServices;
 // Change them to the values specific to your project.
 
 [assembly: AssemblyTitle("oscript-verbal-expressions")]
-[assembly: AssemblyDescription("")]
+[assembly: AssemblyDescription("OneScript Verbal Expressions")]
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("")]
 [assembly: AssemblyProduct("")]
