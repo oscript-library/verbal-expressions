@@ -78,27 +78,14 @@ namespace OnescriptVerbalExpressions
 			return this;
 		}
 		
-		[ContextMethod("ПереводСтроки")]
-		public IRuntimeContextInstance LineBreak()
+		[ContextMethod("МожетБыть")]
+		public IRuntimeContextInstance Maybe(string value)
 		{
-			_verbalExpression.LineBreak();
+			// TODO: sanitaze?
+			_verbalExpression.Maybe(value);
 			return this;
 		}
-		
-		[ContextMethod("ПС")]
-		public IRuntimeContextInstance LF()
-		{
-			_verbalExpression.LineBreak();
-			return this;
-		}
-		
-		[ContextMethod("Отступ")]
-		public IRuntimeContextInstance Tab()
-		{
-			_verbalExpression.Tab();
-			return this;
-		}
-		
+				
 		[ContextMethod("НачалоСтроки")]
 		public IRuntimeContextInstance StartOfLine()
 		{
@@ -115,18 +102,31 @@ namespace OnescriptVerbalExpressions
 			return this;
 		}
 		
-		[ContextMethod("МожетБыть")]
-		public IRuntimeContextInstance Maybe(string value)
-		{
-			// TODO: sanitaze?
-			_verbalExpression.Maybe(value);
-			return this;
-		}
-		
 		#endregion
 
 		#region Special characters and groups
 
+		[ContextMethod("ПереводСтроки")]
+		public IRuntimeContextInstance LineBreak()
+		{
+			_verbalExpression.LineBreak();
+			return this;
+		}
+		
+		[ContextMethod("ПС")]
+		public IRuntimeContextInstance LF()
+		{
+			_verbalExpression.Br();
+			return this;
+		}
+		
+		[ContextMethod("Отступ")]
+		public IRuntimeContextInstance Tab()
+		{
+			_verbalExpression.Tab();
+			return this;
+		}
+		
 		[ContextMethod("Слово")]
 		public IRuntimeContextInstance Word()
 		{
