@@ -63,6 +63,21 @@ namespace OnescriptVerbalExpressions
 			return this;
 		}
 		
+		[ContextMethod("ЧтоНибудь")]
+		public IRuntimeContextInstance Something()
+		{
+			_verbalExpression.Something();
+			return this;
+		}
+		
+		[ContextMethod("ЧтоНибудьНоНе")]
+		public IRuntimeContextInstance SomethingBut(string value)
+		{
+			// TODO: sanitaze?
+			_verbalExpression.SomethingBut(value);
+			return this;
+		}
+		
 		[ContextMethod("НачалоСтроки")]
 		public IRuntimeContextInstance StartOfLine()
 		{
