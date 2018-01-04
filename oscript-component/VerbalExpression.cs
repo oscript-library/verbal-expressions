@@ -48,16 +48,22 @@ namespace OnescriptVerbalExpressions
 		#region Modifiers
 
 		[ContextMethod("Найти")]
-		public IRuntimeContextInstance Find(string value)
+		public IRuntimeContextInstance Find(string value, bool sanitize = true)
 		{
-			_verbalExpression.Find(value);
-			return this;
+			return Then(value, sanitize);
 		}
 		
 		[ContextMethod("Затем")]
-		public IRuntimeContextInstance Then(string value)
+		public IRuntimeContextInstance Then(string value, bool sanitize = true)
 		{
-			_verbalExpression.Then(value);
+			_verbalExpression.Then(value, sanitize);
+			return this;
+		}
+		
+		[ContextMethod("Либо")]
+		public IRuntimeContextInstance Or(string value)
+		{
+			_verbalExpression.Or(value);
 			return this;
 		}
 		
