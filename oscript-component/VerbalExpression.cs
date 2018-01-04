@@ -184,7 +184,7 @@ namespace OnescriptVerbalExpressions
 		[ContextMethod("НачатьЗахват")]
 		public IRuntimeContextInstance BeginCapture(string groupName = "")
 		{
-			if (groupName == "")
+			if (groupName == null)
 			{
 				_verbalExpression.BeginCapture();
 			}
