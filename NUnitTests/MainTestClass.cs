@@ -26,6 +26,9 @@ namespace NUnitTests
 			verbalExpression.Word();
 
 			Assert.AreEqual(verbalExpression.ToStringImpl(), "\\w+");
+
+			var oscriptRegExpImpl = verbalExpression.ToRegex();
+			Assert.NotNull(oscriptRegExpImpl);
 		}
 
 

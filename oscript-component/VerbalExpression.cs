@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Reflection;
 using System.Text.RegularExpressions;
 using CSharpVerbalExpressions;
 using ScriptEngine.Machine.Contexts;
@@ -17,9 +18,24 @@ namespace OnescriptVerbalExpressions
 		#region Terminals
 
 		[ContextMethod("ВРегулярноеВыражение")]
-		public Regex ToRegex()
+		public IRuntimeContextInstance ToRegex()
 		{
-			throw new NotImplementedException();
+			var regexString = ToStringImpl();
+			var oscriptRegExpType = Assembly.Load("ScriptEngine.HostedScript")
+				.GetType("ScriptEngine.HostedScript.Library.Regex.RegExpImpl");
+			var methodInfo = oscriptRegExpType.GetMethod("Constructor");
+			if (methodInfo == null)
+			{
+				throw new TypeLoadException();
+			}
+
+			var oscriptRegExpImpl = (IRuntimeContextInstance) methodInfo.Invoke(
+				null, 
+				new object[] {ValueFactory.Create(regexString)}
+			);
+
+			return oscriptRegExpImpl;
+
 		}
 		
 		[ContextMethod("ВСтроку", "ToString")]
