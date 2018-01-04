@@ -22,8 +22,8 @@ namespace OnescriptVerbalExpressions
 			throw new NotImplementedException();
 		}
 		
-		[ContextMethod("ВСтроку")]
-		public string ToString()
+		[ContextMethod("ВСтроку", "ToString")]
+		public string ToStringImpl()
 		{
 			return _verbalExpression.ToString();
 		}

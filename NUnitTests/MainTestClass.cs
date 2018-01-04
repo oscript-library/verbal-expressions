@@ -25,7 +25,7 @@ namespace NUnitTests
 
 			verbalExpression.Word();
 
-			Assert.AreEqual(verbalExpression.ToString(), "\\w+");
+			Assert.AreEqual(verbalExpression.ToStringImpl(), "\\w+");
 		}
 
 
