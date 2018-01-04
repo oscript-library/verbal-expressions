@@ -175,9 +175,16 @@ namespace OnescriptVerbalExpressions
 		}
 		
 		[ContextMethod("ОдинИлиБольше")]
-		public IRuntimeContextInstance OneOrMore(string value)
+		public IRuntimeContextInstance OneOrMore(string value = "")
 		{
-			_verbalExpression.Multiple(value);
+			if (value == null)
+			{
+				_verbalExpression.Add("+", false);
+			}
+			else
+			{
+				_verbalExpression.Multiple(value);
+			}
 			return this;
 		}
 		
