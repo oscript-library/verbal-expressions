@@ -305,7 +305,7 @@ namespace OnescriptVerbalExpressions
 		[ContextMethod("ОдинИлиБольше")]
 		public VerbalExpression OneOrMore(string value = "", bool sanitize = true)
 		{
-			if (value == null)
+			if (string.IsNullOrEmpty(value))
 			{
 				_verbalExpression.Add("+", false);
 			}
@@ -324,7 +324,7 @@ namespace OnescriptVerbalExpressions
 		[ContextMethod("НачатьЗахват")]
 		public VerbalExpression BeginCapture(string groupName = "")
 		{
-			if (groupName == null)
+			if (string.IsNullOrEmpty(groupName))
 			{
 				_verbalExpression.BeginCapture();
 			}
