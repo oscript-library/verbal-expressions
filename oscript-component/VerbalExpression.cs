@@ -135,6 +135,17 @@ namespace OnescriptVerbalExpressions
 		}
 
 		#endregion
+
+		#region Other
+
+		[ContextMethod("Добавить")]
+		public IRuntimeContextInstance Add(string value)
+		{
+			_verbalExpression.Add(value);
+			return this;
+		}
+
+		#endregion
 		
 		[ScriptConstructor]
 		public static IRuntimeContextInstance Constructor()
