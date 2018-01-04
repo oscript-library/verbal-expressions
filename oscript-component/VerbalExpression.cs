@@ -156,12 +156,12 @@ namespace OnescriptVerbalExpressions
 		/// Поиск необязательного значения. 
 		/// </summary>
 		/// <param name="value">Искомое значение</param>
+		/// <param name="sanitize">Экранировать переданное значение</param>
 		/// <returns>ВербальноеВыражение</returns>
 		[ContextMethod("МожетБыть")]
-		public VerbalExpression Maybe(string value)
+		public VerbalExpression Maybe(string value, bool sanitize = true)
 		{
-			// TODO: sanitaze?
-			_verbalExpression.Maybe(value);
+			_verbalExpression.Maybe(value, sanitize);
 			return this;
 		}
 				
