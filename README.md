@@ -1,7 +1,7 @@
 # OneScript Verbal Expressions
 
 [![Build status](https://ci.appveyor.com/api/projects/status/w502tirowofni5at/branch/master?svg=true)](https://ci.appveyor.com/project/nixel2007/oscript-verbal-expessions/branch/develop)
-[![Build Status](https://travis-ci.org/silverbulleters-research/oscript-verbal-expessions.svg?branch=develop)](https://travis-ci.org/silverbulleters-research/oscript-verbal-expessions)
+[![Build Status](https://travis-ci.org/oscript-library/verbal-expessions.svg?branch=develop)](https://travis-ci.org/oscript-library/verbal-expessions)
 
 ## Регулярные выражения - это просто!
 
@@ -15,7 +15,7 @@ verbal-expressions - это библиотека для OneScript, помога�
 
 ### С релизов GitHub
 
-1. Перейти на [страницу релизов](https://github.com/silverbulleters-research/oscript-verbal-expessions/releases)
+1. Перейти на [страницу релизов](https://github.com/oscript-library/verbal-expessions/releases)
 1. Скачать артефакт verbal-expressions-x.y.z.ospx
 1. Установить с помощью opm: `opm install -f verbal-expressions-x.y.z.ospx`
 
@@ -85,7 +85,7 @@ verbal-expressions - это библиотека для OneScript, помога�
 Сообщить(ТекстРегулярногоВыражения); // ^(((http)(s)?)|(ftp))(://)([^ ]+)$
 ```
 
-Больше примеров в [файле с приемочными тестами](https://github.com/silverbulleters-research/oscript-verbal-expessions/blob/master/NUnitTests/Tests/external.os).
+Больше примеров в [файле с приемочными тестами](https://github.com/oscript-library/verbal-expessions/blob/master/NUnitTests/Tests/external.os).
 
 ## Список методов
 
