@@ -21,7 +21,7 @@ verbal-expressions - это библиотека для OneScript, помога�
 
 ### С AppVeyor
 
-1. Перейти на страницу [последней сборки](https://ci.appveyor.com/project/nixel2007/oscript-verbal-expessions) или [истории сборок](https://ci.appveyor.com/project/nixel2007/oscript-verbal-expessions/history) и выбрать интересующую сборку
+1. Перейти на страницу [последней сборки](https://ci.appveyor.com/project/nixel2007/verbal-expressions) или [истории сборок](https://ci.appveyor.com/project/nixel2007/verbal-expressions/history) и выбрать интересующую сборку
 1. Перейти в раздел Artifacts
 1. Скачать артефакт verbal-expressions-x.y.z.ospx
 1. Установить с помощью opm: `opm install -f verbal-expressions-x.y.z.ospx`
