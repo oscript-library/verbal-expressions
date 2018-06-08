@@ -1,7 +1,7 @@
 # OneScript Verbal Expressions
 
-[![Build status](https://ci.appveyor.com/api/projects/status/w502tirowofni5at/branch/master?svg=true)](https://ci.appveyor.com/project/nixel2007/oscript-verbal-expessions/branch/develop)
-[![Build Status](https://travis-ci.org/oscript-library/verbal-expessions.svg?branch=develop)](https://travis-ci.org/oscript-library/verbal-expessions)
+[![Build status](https://ci.appveyor.com/api/projects/status/y3j2uvwgthf4rmfu/branch/develop?svg=true)](https://ci.appveyor.com/project/nixel2007/verbal-expressions/branch/develop)
+[![Build Status](https://travis-ci.org/oscript-library/verbal-expressions.svg?branch=develop)](https://travis-ci.org/oscript-library/verbal-expressions)
 
 ## Регулярные выражения - это просто!
 
